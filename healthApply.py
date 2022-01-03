@@ -13,7 +13,7 @@ class Apply():
         self.NetID = NetID
         self.pwd = pwd
         options = webdriver.FirefoxOptions()
-        #options.add_argument("--headless") #设置火狐为headless无界面模式
+        options.add_argument("--headless") #设置火狐为headless无界面模式
         options.add_argument("--disable-gpu")
         options.binary_location = "./Mozilla Firefox/firefox.exe"
         self.driver = webdriver.Firefox(executable_path = geckodriver_path,options=options)
@@ -73,12 +73,14 @@ class Apply():
         self.driver.find_element_by_xpath('//*[@id="form_command_bar"]/li[1]').click() # 提交
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
         self.driver.find_element_by_xpath('//*[@class="dialog_footer"]/button').click()
+        self.driver.quit()
 
         try:
             # 如果有未打钩的情况下需要再执行多一步
             self.driver.find_element_by_id('V1_CTRL82').click()
             self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
             self.driver.find_element_by_xpath('//*[@class="dialog_footer"]/button').click()
+            self.driver.quit()
         except:
             pass
 
