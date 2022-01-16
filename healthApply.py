@@ -5,9 +5,6 @@ from time import sleep
 import ddddocr
 import os
 import re
-ocr = ddddocr.DdddOcr()
-path=os.getcwd()
-geckodriver_path = '/'.join([path,'geckodriver.exe'])
 class Apply():
     def __init__(self, NetID, pwd):
         self.NetID = NetID
@@ -28,6 +25,7 @@ class Apply():
 
     def getCaptcha(self, filePath = 'captcha.png'):
         # 识别
+        ocr = ddddocr.DdddOcr()
         with open(f"{os.environ['GITHUB_ACTION_PATH']}/%s" %filePath, 'rb') as f:
             b = f.read()
         text=ocr.classification(b)
@@ -55,6 +53,7 @@ class Apply():
         # 100% 缩放情况下使用
         self.driver.get(r'http://jksb.sysu.edu.cn/infoplus/form/XNYQSB/start')
         #self.driver.set_window_size(900, 900)
+        sleep(3)
         self.waituntil('id', 'username')
         while True:
             img=self.driver.find_element_by_xpath('//*[@id="captchaImg"]')
@@ -90,4 +89,3 @@ if __name__ == '__main__':
     with open(f"{os.environ['GITHUB_ACTION_PATH']}/text.txt", 'r') as f:
         for f in f.readlines():
             apply = Apply(f.split(',',1)[0], f.split(',',1)[1])
-            sleep(10)
