@@ -5,6 +5,7 @@ from time import sleep
 import ddddocr
 import os
 import re
+ocr = ddddocr.DdddOcr()
 class Apply():
     def __init__(self, NetID, pwd):
         self.NetID = NetID
@@ -25,7 +26,6 @@ class Apply():
 
     def getCaptcha(self, filePath = 'captcha.png'):
         # 识别
-        ocr = ddddocr.DdddOcr()
         with open(f"{os.environ['GITHUB_ACTION_PATH']}/%s" %filePath, 'rb') as f:
             b = f.read()
         text=ocr.classification(b)
@@ -59,8 +59,19 @@ class Apply():
             img=self.driver.find_element_by_xpath('//*[@id="captchaImg"]')
             img.screenshot(f"{os.environ['GITHUB_ACTION_PATH']}/captcha.png")
             captcha = self.getCaptcha()
+            while True:
+                l=len(captcha)
+                if l < 4:
+                    self.driver.refresh()
+                    self.waituntil('id', 'username')
+                    img=self.driver.find_element_by_xpath('//*[@id="captchaImg"]')
+                    img.screenshot(f"{os.environ['GITHUB_ACTION_PATH']}/captcha.png")
+                    captcha = self.getCaptcha()
+                else:
+                    break
             print('captcha is %s' % captcha)
             self.login(captcha) # 尝试登陆
+            sleep(3)
             if not self.waituntil('xpath', "//*[text()='验证码不正确 ']"):
                 break
 
