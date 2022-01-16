@@ -36,6 +36,7 @@ class Apply():
 
     def login(self, captcha):
         self.driver.find_element_by_id('username').send_keys(self.NetID)
+        print(self.NetID)
         self.driver.find_element_by_id('password').send_keys(self.pwd)
         self.driver.find_element_by_id('captcha').send_keys(captcha)
         self.driver.find_element_by_name('submit').click()
@@ -57,7 +58,7 @@ class Apply():
         self.waituntil('id', 'username')
         while True:
             img=self.driver.find_element_by_xpath('//*[@id="captchaImg"]')
-            img.screenshot('captcha.png')
+            img.screenshot(f"{os.environ['GITHUB_ACTION_PATH']}/captcha.png")
             captcha = self.getCaptcha()
             print('captcha is %s' % captcha)
             self.login(captcha) # 尝试登陆
@@ -68,9 +69,10 @@ class Apply():
 
         self.waituntil('xpath', '//nobr[text()="下一步"]')
         self.driver.find_element_by_xpath("//nobr[text()='下一步']").click() # 进入表单
-        sleep(3)
+        sleep(3.5)
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
         self.driver.find_element_by_xpath('//*[@id="form_command_bar"]/li[1]').click() # 提交
+        print("提交成功")
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
         self.driver.find_element_by_xpath('//*[@class="dialog_footer"]/button').click()
         self.driver.quit()
