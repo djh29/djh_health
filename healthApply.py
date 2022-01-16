@@ -90,3 +90,4 @@ if __name__ == '__main__':
     with open(f"{os.environ['GITHUB_ACTION_PATH']}/text.txt", 'r') as f:
         for f in f.readlines():
             apply = Apply(f.split(',',1)[0], f.split(',',1)[1])
+            sleep(10)
