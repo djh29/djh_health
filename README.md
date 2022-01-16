@@ -13,21 +13,11 @@
 ###### 将geckodriver.exe其放在Chrome/Firefox安装目录下
 ###### 将浏览器安装目录添加到系统环境变量中
 ---
-### 2 pytesseract、tesseract安装及配置
-#### 2.1 pytesseract安装
-###### 命令行下使用以下pip命令
-###### pip install pytesseract (记得换清华源)
-#### 2.2 tesseract安装及配置
-###### 下载最新正式版tesseract
-###### 网址:https://digi.bib.uni-mannheim.de/tesseract/
-###### 安装tesseract-ocr-w64-setup-v5.0.0.20190623.exe
-###### 将tesseract安装目录添加到系统环境变量中
----
-### 3 添加自己的NetID、密码
-###### 打开healthApply.py
-###### 82行的语句
-###### `apply = Apply('你的NetID', '密码')`
+### 2 添加自己的NetID、密码
+###### 打开text.txt
+###### 最后一行
 ###### 用自己的NetID、密码替换即可
+###### 最后一行用回车代替
 ---
 # 历史版本
 ---
