@@ -16,11 +16,6 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.7
-      - name: 'Install requirements'
-        run: pip install -r djh29/sysu_health/requirements.txt
-      - name: 'Working'
-        run: python djh29/sysu_health/healthApply.py
-    #steps:
-    #- name: Health Report
-      #uses: djh29/sysu_health@main
+      - name: Health Report
+        uses: djh29/sysu_health@main
       
