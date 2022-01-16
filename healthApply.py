@@ -15,8 +15,8 @@ class Apply():
         options = webdriver.FirefoxOptions()
         options.add_argument("--headless") #设置火狐为headless无界面模式
         options.add_argument("--disable-gpu")
-        options.binary_location = "./Mozilla Firefox/firefox.exe"
-        self.driver = webdriver.Firefox(executable_path = geckodriver_path,options=options)
+        #options.binary_location = "./Mozilla Firefox/firefox.exe"
+        self.driver = webdriver.Firefox(executable_path=f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe",options=options)
         try:
             self.main()
         except:
@@ -28,7 +28,7 @@ class Apply():
 
     def getCaptcha(self, filePath = 'captcha.png'):
         # 识别
-        with open(r'./%s' %filePath, 'rb') as f:
+        with open(f"{os.environ['GITHUB_ACTION_PATH']}/%s" %filePath, 'rb') as f:
             b = f.read()
         text=ocr.classification(b)
         text=''.join(re.findall(r'[a-zA-Z0-9]',text))
