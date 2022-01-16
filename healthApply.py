@@ -82,11 +82,11 @@ class Apply():
         sleep(3.5)
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
         self.driver.find_element_by_xpath('//*[@id="form_command_bar"]/li[1]').click() # 提交
+        sleep(3.5)
         print("提交成功")
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
         self.driver.find_element_by_xpath('//*[@class="dialog_footer"]/button').click()
         self.driver.quit()
-
         try:
             # 如果有未打钩的情况下需要再执行多一步
             self.driver.find_element_by_id('V1_CTRL82').click()
