@@ -1,2 +1,4 @@
-ddddocr==1.0.8
+Pillow
 selenium==3.141.0
+requests
+onnxruntime
