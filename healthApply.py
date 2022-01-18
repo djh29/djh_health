@@ -113,6 +113,8 @@ class Apply():
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
         sleep(4)
         self.driver.find_element_by_xpath('//*[@class="dialog_footer"]/button').click()
+        sleep(2)
+        print("Done.")
         self.driver.quit()
         try:
             # 如果有未打钩的情况下需要再执行多一步
