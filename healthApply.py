@@ -70,6 +70,7 @@ class Apply():
         #print(self.NetID)
         self.driver.find_element_by_id('password').send_keys(self.pwd)
         self.driver.find_element_by_id('captcha').send_keys(captcha)
+        sleep(1)
         self.driver.find_element_by_name('submit').click()
 
     def waituntil(self, by, value, time = 5):
@@ -107,11 +108,11 @@ class Apply():
 
         self.waituntil('xpath', '//nobr[text()="下一步"]')
         self.driver.find_element_by_xpath("//nobr[text()='下一步']").click() # 进入表单
-        sleep(4)
+        sleep(6)
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
         self.driver.find_element_by_xpath('//*[@id="form_command_bar"]/li[1]').click() # 提交
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
-        sleep(4)
+        sleep(2)
         self.driver.find_element_by_xpath('//*[@class="dialog_footer"]/button').click()
         sleep(2)
         print("Done.")
@@ -128,4 +129,5 @@ class Apply():
 if __name__ == '__main__':
     with open(f"{os.environ['GITHUB_ACTION_PATH']}/text.txt", 'r') as f:
         for f in f.readlines():
+            f=f.strip()
             apply = Apply(f.split(',',1)[0], f.split(',',1)[1])
