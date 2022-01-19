@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
 from time import sleep
 import os
 import re
@@ -18,7 +19,7 @@ class Apply():
         options.add_argument("--headless") #设置火狐为headless无界面模式
         options.add_argument("--disable-gpu")
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
-        self.driver = webdriver.Firefox(executable_path=f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe",options=options)
+        self.driver = webdriver.Firefox(service =Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe"),options=options)
         try:
             self.main()
         except:
