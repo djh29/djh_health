@@ -18,6 +18,9 @@ class Apply():
         options = webdriver.FirefoxOptions()
         options.add_argument("--headless") #设置火狐为headless无界面模式
         options.add_argument("--disable-gpu")
+        service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe")
+        service.command_line_args()
+        service.start()
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
         self.driver = webdriver.Firefox(service =Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe"),options=options)
         try:
@@ -51,9 +54,9 @@ class Apply():
         inputs=inputs.ravel()
         inputs=self.convert2array(inputs,90,32)
         inputs=np.array(inputs)
-        session=onnxruntime.InferenceSession(f"{os.environ['GITHUB_ACTION_PATH']}/cnn.onnx")
-        input_name = session.get_inputs()
-        pred=session.run([],{input_name[0].name:inputs.astype(np.float32).reshape(1,3,90,32)})
+        session1=onnxruntime.InferenceSession(f"{os.environ['GITHUB_ACTION_PATH']}/cnn.onnx")
+        input_name = session1.get_inputs()
+        pred=session1.run([],{input_name[0].name:inputs.astype(np.float32).reshape(1,3,90,32)})
         pred=pred[0].flatten()
         strs=""
         for t in range(4):
@@ -118,6 +121,7 @@ class Apply():
         sleep(2)
         print("Done.")
         self.driver.quit()
+        service.stop()
         try:
             # 如果有未打钩的情况下需要再执行多一步
             self.driver.find_element_by_id('V1_CTRL82').click()
