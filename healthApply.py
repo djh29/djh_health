@@ -113,14 +113,15 @@ class Apply():
 
         self.waituntil('xpath', '//nobr[text()="下一步"]')
         self.driver.find_element(By.XPATH,"//nobr[text()='下一步']").click() # 进入表单
-        sleep(10)
+        sleep(5)
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
         self.driver.find_element(By.XPATH,'//*[@id="form_command_bar"]/li[1]').click() # 提交
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
-        sleep(10)
+        sleep(5)
         self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
-        sleep(10)
-        print("Done.")
+        sleep(5)
+        result = driver.find_element(By.XPATH,'//div[10]/div/div[1]/div[2]').text
+        print(result+"Done.")
         self.driver.quit()
         service.stop()
         try:
