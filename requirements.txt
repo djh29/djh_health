@@ -1,4 +1,4 @@
 Pillow
-selenium == 3.141.0
+selenium==3.141.0
 requests
 onnxruntime
