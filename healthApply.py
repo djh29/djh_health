@@ -11,6 +11,8 @@ from PIL import Image,ImageEnhance
 import numpy as np
 import requests
 session=requests.Session()
+service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe")
+service.command_line_args()
 class Apply():
     def __init__(self, NetID, pwd):
         self.NetID = NetID
@@ -19,8 +21,6 @@ class Apply():
         options = webdriver.FirefoxOptions()
         options.add_argument("--headless") #设置火狐为headless无界面模式
         options.add_argument("--disable-gpu")
-        service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe")
-        service.command_line_args()
         service.start()
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
         self.driver = webdriver.Firefox(options=options)
