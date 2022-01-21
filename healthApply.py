@@ -23,7 +23,7 @@ class Apply():
         service.command_line_args()
         service.start()
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
-        self.driver = webdriver.Firefox(service =Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe"),options=options)
+        self.driver = webdriver.Firefox(options=options)
         try:
             self.main()
         except:
