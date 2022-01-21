@@ -75,10 +75,10 @@ class Apply():
         #print(self.NetID)
         self.driver.find_element(By.ID,'password').send_keys(self.pwd)
         self.driver.find_element(By.ID,'captcha').send_keys(captcha)
-        sleep(1)
+        sleep(4)
         self.driver.find_element(By.NAME,'submit').click()
 
-    def waituntil(self, by, value, time = 5):
+    def waituntil(self, by, value, time = 15):
         while time:
             elements = self.driver.find_elements(by, value)
             if len(elements):
@@ -113,13 +113,13 @@ class Apply():
 
         self.waituntil('xpath', '//nobr[text()="下一步"]')
         self.driver.find_element(By.XPATH,"//nobr[text()='下一步']").click() # 进入表单
-        sleep(6)
+        sleep(10)
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
         self.driver.find_element(By.XPATH,'//*[@id="form_command_bar"]/li[1]').click() # 提交
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
-        sleep(2)
+        sleep(10)
         self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
-        sleep(2)
+        sleep(10)
         print("Done.")
         self.driver.quit()
         service.stop()
