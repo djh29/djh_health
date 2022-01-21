@@ -32,6 +32,7 @@ class Apply():
 
     def __del__(self):
         self.driver.quit()
+        service.stop()
 
     def convert2array(self,imgdata,width, height):
         imgarray=[0 for a in range(3)]
@@ -130,6 +131,7 @@ class Apply():
             self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
             self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
             self.driver.quit()
+            service.stop()
         except:
             pass
 
