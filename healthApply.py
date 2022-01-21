@@ -2,6 +2,7 @@
 # coding: utf-8
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.common.by import By
 from time import sleep
 import os
 import re
@@ -70,12 +71,12 @@ class Apply():
         return strs[0:4]
 
     def login(self, captcha):
-        self.driver.find_element_by_id('username').send_keys(self.NetID)
+        self.driver.find_element(By.ID,'username').send_keys(self.NetID)
         #print(self.NetID)
-        self.driver.find_element_by_id('password').send_keys(self.pwd)
-        self.driver.find_element_by_id('captcha').send_keys(captcha)
+        self.driver.find_element(By.ID,'password').send_keys(self.pwd)
+        self.driver.find_element(By.ID,'captcha').send_keys(captcha)
         sleep(1)
-        self.driver.find_element_by_name('submit').click()
+        self.driver.find_element(By.NAME,'submit').click()
 
     def waituntil(self, by, value, time = 5):
         while time:
@@ -111,22 +112,22 @@ class Apply():
         #self.driver.maximize_window()
 
         self.waituntil('xpath', '//nobr[text()="下一步"]')
-        self.driver.find_element_by_xpath("//nobr[text()='下一步']").click() # 进入表单
+        self.driver.find_element(By.XPATH,"//nobr[text()='下一步']").click() # 进入表单
         sleep(6)
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
-        self.driver.find_element_by_xpath('//*[@id="form_command_bar"]/li[1]').click() # 提交
+        self.driver.find_element(By.XPATH,'//*[@id="form_command_bar"]/li[1]').click() # 提交
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
         sleep(2)
-        self.driver.find_element_by_xpath('//*[@class="dialog_footer"]/button').click()
+        self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
         sleep(2)
         print("Done.")
         self.driver.quit()
         service.stop()
         try:
             # 如果有未打钩的情况下需要再执行多一步
-            self.driver.find_element_by_id('V1_CTRL82').click()
+            self.driver.find_element(By.ID,'V1_CTRL82').click()
             self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
-            self.driver.find_element_by_xpath('//*[@class="dialog_footer"]/button').click()
+            self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
             self.driver.quit()
         except:
             pass
