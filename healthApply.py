@@ -119,10 +119,10 @@ class Apply():
         self.driver.find_element(By.XPATH,'//*[@id="form_command_bar"]/li[1]').click() # 提交
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
         sleep(5)
-        result = driver.find_element(By.XPATH,'//*[@class="dialog_content"]').text
+        #result = driver.find_element(By.XPATH,'//*[@class="dialog_content"]').text
         self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
         sleep(5)
-        print(result+"Done.")
+        print("Done.")
         self.driver.quit()
         self.service.stop()
         try:
