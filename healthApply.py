@@ -20,9 +20,9 @@ class Apply():
         options = webdriver.FirefoxOptions()
         options.add_argument("--headless") #设置火狐为headless无界面模式
         options.add_argument("--disable-gpu")
-        service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe")
-        service.command_line_args()
-        service.start()
+        self.service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe")
+        self.service.command_line_args()
+        self.service.start()
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
         self.driver = webdriver.Firefox(options=options)
         try:
@@ -33,7 +33,7 @@ class Apply():
 
     def __del__(self):
         self.driver.quit()
-        service.stop()
+        self.service.stop()
 
     def convert2array(self,imgdata,width, height):
         imgarray=[0 for a in range(3)]
@@ -125,14 +125,14 @@ class Apply():
         result = driver.find_element(By.XPATH,'//div[10]/div/div[1]/div[2]').text
         print(result+"Done.")
         self.driver.quit()
-        service.stop()
+        self.service.stop()
         try:
             # 如果有未打钩的情况下需要再执行多一步
             self.driver.find_element(By.ID,'V1_CTRL82').click()
             self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
             self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
             self.driver.quit()
-            service.stop()
+            self.service.stop()
         except:
             pass
 
