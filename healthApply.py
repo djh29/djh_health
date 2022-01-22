@@ -12,7 +12,6 @@ import numpy as np
 import requests
 session=requests.Session()
 class Apply():
-    global service
     def __init__(self, NetID, pwd):
         self.NetID = NetID
         print(NetID)
