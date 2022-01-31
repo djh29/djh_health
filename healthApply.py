@@ -20,10 +20,10 @@ class Apply():
         options.add_argument("--headless") #设置火狐为headless无界面模式
         options.add_argument("--disable-gpu")
         self.service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe")
-        self.service.command_line_args()
+        #self.service.command_line_args()
         self.service.start()
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
-        self.driver = webdriver.Firefox(options=options)
+        self.driver = webdriver.Firefox(service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe"),options=options)
         try:
             self.main()
         except:
