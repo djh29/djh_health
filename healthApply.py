@@ -102,8 +102,10 @@ class Apply():
                 session.cookies.set(cookie['name'], cookie['value'])
             captcha_url = 'https://cas.sysu.edu.cn/cas/captcha.jsp'
             response = session.get(captcha_url, headers=headers)
+            sleep(5)
             with open(f"{os.environ['GITHUB_ACTION_PATH']}/captcha.jpg", "wb") as f:
                 f.write(response.content)
+            sleep(3)
             captcha = self.getCaptcha()
             print('captcha is %s' % captcha)
             self.login(captcha) # 尝试登陆
@@ -114,15 +116,15 @@ class Apply():
 
         self.waituntil('xpath', '//nobr[text()="下一步"]')
         self.driver.find_element(By.XPATH,"//nobr[text()='下一步']").click() # 进入表单
-        sleep(5)
+        sleep(8)
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
         self.driver.find_element(By.XPATH,'//*[@id="form_command_bar"]/li[1]').click() # 提交
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
-        sleep(5)
+        sleep(8)
         print("提交。")
         #result = driver.find_element(By.XPATH,'//*[@class="dialog_content"]').text
         self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
-        sleep(5)
+        sleep(8)
         print("Done.")
         self.driver.quit()
         self.service.stop()
