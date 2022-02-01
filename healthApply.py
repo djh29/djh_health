@@ -95,8 +95,8 @@ class Apply():
         #self.driver.set_window_size(900, 900)
         self.waituntil('id', 'username')
         while True:
-            headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"}
+            headers = {'Connection': 'Keep-Alive',
+        'User-Agent': 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0)'}
             cookies=self.driver.get_cookies()
             for cookie in cookies:
                 session.cookies.set(cookie['name'], cookie['value'])
