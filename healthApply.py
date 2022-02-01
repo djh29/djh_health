@@ -107,7 +107,7 @@ class Apply():
                 f.write(response.content)
             sleep(3)
             captcha = self.getCaptcha()
-            print('captcha is %s' % captcha)
+            print(        'captcha is %s' % captcha)
             self.login(captcha) # 尝试登陆
             if not self.waituntil('xpath', "//*[text()='验证码不正确 ']"):
                 break
@@ -116,15 +116,15 @@ class Apply():
 
         self.waituntil('xpath', '//nobr[text()="下一步"]')
         self.driver.find_element(By.XPATH,"//nobr[text()='下一步']").click() # 进入表单
-        sleep(8)
+        sleep(10)
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
         self.driver.find_element(By.XPATH,'//*[@id="form_command_bar"]/li[1]').click() # 提交
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
-        sleep(8)
+        sleep(10)
         print("        提交。")
         #result = driver.find_element(By.XPATH,'//*[@class="dialog_content"]').text
         self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
-        sleep(8)
+        sleep(10)
         print("        Done.")
         self.driver.quit()
         self.service.stop()
