@@ -11,6 +11,9 @@ from PIL import Image,ImageEnhance
 import numpy as np
 import requests
 session=requests.Session()
+c_service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe")
+c_service.command_line_args()
+c_service.start()
 class Apply():
     def __init__(self, NetID, pwd):
         self.NetID = NetID
@@ -19,11 +22,8 @@ class Apply():
         options = webdriver.FirefoxOptions()
         options.add_argument("--headless") #设置火狐为headless无界面模式
         options.add_argument("--disable-gpu")
-        self.service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe")
-        self.service.command_line_args()
-        self.service.start()
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
-        self.driver = webdriver.Firefox(service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe"),options=options)
+        self.driver = webdriver.Firefox(options=options)
         try:
             self.main()
         except:
@@ -32,7 +32,7 @@ class Apply():
 
     def __del__(self):
         self.driver.quit()
-        self.service.stop()
+        c_service.stop()
 
     def convert2array(self,imgdata,width, height):
         imgarray=[0 for a in range(3)]
@@ -127,7 +127,7 @@ class Apply():
         sleep(10)
         print("        Done.")
         self.driver.quit()
-        self.service.stop()
+        c_service.stop()
         try:
             # 如果有未打钩的情况下需要再执行多一步
             self.driver.find_element(By.ID,'V1_CTRL82').click()
