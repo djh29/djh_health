@@ -24,7 +24,7 @@ class Apply():
         options.add_argument("--disable-gpu")
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
         self.driver = webdriver.Firefox(options=options)
-        self.driver.get(r'http://jksb.sysu.edu.cn/infoplus/form/XNYQSB/start')
+        self.driver.get(r'https://www.baidu.com/')
         self.driver.close()
         try:
             self.main()
