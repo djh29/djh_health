@@ -24,6 +24,8 @@ class Apply():
         options.add_argument("--disable-gpu")
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
         self.driver = webdriver.Firefox(options=options)
+        self.driver.get(r'http://jksb.sysu.edu.cn/infoplus/form/XNYQSB/start')
+        self.driver.close()
         try:
             self.main()
         except:
@@ -108,6 +110,12 @@ class Apply():
             sleep(3)
             captcha = self.getCaptcha()
             print(        'captcha is %s' % captcha)
+            #判断文件是否存在
+            if(os.path.exists(f"{os.environ['GITHUB_ACTION_PATH']}/captcha.jpg")):
+                os.remove(f"{os.environ['GITHUB_ACTION_PATH']}/captcha.jpg")
+                print("移除目录下文件")
+            else:
+                print("要删除的文件不存在！")
             self.login(captcha) # 尝试登陆
             if not self.waituntil('xpath', "//*[text()='验证码不正确 ']"):
                 break
