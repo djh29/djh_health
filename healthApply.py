@@ -25,8 +25,8 @@ class Apply():
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
         self.driver = webdriver.Firefox(options=options)
         try:
-            self.driver.get(r'https://www.baidu.com/')
-            self.driver.close()
+            #self.driver.get(r'https://www.baidu.com/')
+            #self.driver.close()
             self.main()
         except:
             self.__del__()
