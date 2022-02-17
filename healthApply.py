@@ -24,9 +24,9 @@ class Apply():
         options.add_argument("--disable-gpu")
         #options.binary_location = "./Mozilla Firefox/firefox.exe"
         self.driver = webdriver.Firefox(options=options)
-        self.driver.get(r'https://www.baidu.com/')
-        self.driver.close()
         try:
+            self.driver.get(r'https://www.baidu.com/')
+            self.driver.close()
             self.main()
         except:
             self.__del__()
@@ -142,7 +142,7 @@ class Apply():
             self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
             self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
             self.driver.quit()
-            self.service.stop()
+            c_service.service.stop()
         except:
             pass
 
