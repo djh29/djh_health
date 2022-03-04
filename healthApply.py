@@ -96,7 +96,7 @@ class Apply():
         return False
     
     # 失败后随机 3-5s 后重试，最多 6 次
-    @retry(wait_random_min=3000, wait_random_max=5000, stop_max_attempt_number=6)
+    @retry(wait_random_min=2000, wait_random_max=4000, stop_max_attempt_number=3)
     def main(self):
         # 100% 缩放情况下使用
         self.driver.get(r'http://jksb.sysu.edu.cn/infoplus/form/XNYQSB/start')
