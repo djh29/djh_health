@@ -5,12 +5,22 @@ author: 'Editio'
 branding:
   icon: thermometer
   color: green
-
+  
+inputs:
+  netid:
+    description: 'Your netid'
+    required: true
+  password:
+    description: 'Your password'
+    required: true
+    
 runs:
   using: "composite"
   steps:
     - shell: powershell
       env:
+        NETID: ${{ inputs.netid }}
+        PASSWORD: ${{ inputs.password }}
         PYTHONIOENCODING: utf-8
         PYTHONLEGACYWINDOWSSTDIO: utf-8
       run: |
