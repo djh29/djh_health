@@ -13,7 +13,7 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v2
       - name: Health Report
-        uses: djh29/sysu_health@main
+        uses: djh29/djh_health@main
         with:
           netid: ${{secrets.NETID}}
           password: ${{secrets.PASSWORD}}
