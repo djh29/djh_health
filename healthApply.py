@@ -155,8 +155,6 @@ class Apply():
 def spilt(id,pw):
     id_list=id.split(",")
     pw_list=pw.split(",")
-    id_list.remove('')
-    pw_list.remove('')
     list_d=dict(zip(id_list,pw_list))
     print(list_d)
     return list_d
