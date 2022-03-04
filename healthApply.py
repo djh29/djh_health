@@ -156,7 +156,7 @@ def spilt(id,pw):
     id_list=id.split(",")
     pw_list=pw.split(",")
     list_d=dict(zip(id_list,pw_list))
-    print(list_d)
+    #print(list_d)
     return list_d
 
 if __name__ == '__main__':
