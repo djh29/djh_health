@@ -2,3 +2,4 @@ Pillow
 selenium
 requests
 onnxruntime
+retrying
