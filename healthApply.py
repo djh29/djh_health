@@ -10,10 +10,13 @@ import onnxruntime
 from PIL import Image,ImageEnhance
 import numpy as np
 import requests
+from retrying import retry
+
 session=requests.Session()
 c_service=Service(f"{os.environ['GITHUB_ACTION_PATH']}/geckodriver.exe")
 c_service.command_line_args()
 c_service.start()
+
 class Apply():
     def __init__(self, NetID, pwd):
         self.NetID = NetID
@@ -72,6 +75,7 @@ class Apply():
                 strs +=key_map[ans+22]
         strs=''.join(re.findall(r'[a-zA-Z0-9]',strs))
         return strs[0:4]
+    
 
     def login(self, captcha):
         self.driver.find_element(By.ID,'username').send_keys(self.NetID)
@@ -90,7 +94,9 @@ class Apply():
                 time -= 1
                 sleep(1)
         return False
-
+    
+    # 失败后随机 3-5s 后重试，最多 6 次
+    @retry(wait_random_min=3000, wait_random_max=5000, stop_max_attempt_number=6)
     def main(self):
         # 100% 缩放情况下使用
         self.driver.get(r'http://jksb.sysu.edu.cn/infoplus/form/XNYQSB/start')
@@ -146,8 +152,22 @@ class Apply():
         except:
             pass
 
+def spilt(id,pw):
+    id_list=id.split(",")
+    pw_list=pw.split(",")
+    id_list.remove('')
+    pw_list.remove('')
+    list_d=dict(zip(id_list,pw_list))
+    print(list_d)
+    return list_d
+
 if __name__ == '__main__':
-    with open(f"{os.environ['GITHUB_ACTION_PATH']}/text.txt", 'r') as f:
-        for f in f.readlines():
-            f=f.strip()
-            apply = Apply(f.split(',',1)[0], f.split(',',1)[1])
+    netid = os.environ['NETID']
+    password = os.environ['PASSWORD']
+    d=spilt(netid,password)
+    for i in d.keys():
+        apply = Apply(i, d[i])
+    #with open(f"{os.environ['GITHUB_ACTION_PATH']}/text.txt", 'r') as f:
+        #for f in f.readlines():
+            #f=f.strip()
+            #apply = Apply(f.split(',',1)[0], f.split(',',1)[1])
