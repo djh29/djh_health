@@ -134,8 +134,6 @@ class Apply():
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
         self.driver.find_element(By.XPATH,'//*[@id="form_command_bar"]/li[1]').click() # 提交
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
-        sleep(5)
-        result = driver.find_element(By.XPATH, '//div[8]/div/div[1]/div[2]').text
         sleep(10)
         print("        提交。")
         #result = driver.find_element(By.XPATH,'//*[@class="dialog_content"]').text
@@ -167,10 +165,7 @@ if __name__ == '__main__':
     password = os.environ['PASSWORD']
     d=spilt(netid,password)
     for i in d.keys():
-        try:
-            apply = Apply(i, d[i])
-        except:
-            print('健康申报失败')
+        apply = Apply(i, d[i])
     #with open(f"{os.environ['GITHUB_ACTION_PATH']}/text.txt", 'r') as f:
         #for f in f.readlines():
             #f=f.strip()
