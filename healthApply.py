@@ -125,7 +125,7 @@ class Apply():
             self.login(captcha) # 尝试登陆
             if not self.waituntil('xpath', "//*[text()='验证码不正确 ']"):
                 break
-
+        sleep(5)
         #self.driver.maximize_window()
         try:
             number = self.driver.find_element(By.XPATH, '//*[@id="title_description"]').text
