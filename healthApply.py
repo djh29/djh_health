@@ -127,6 +127,7 @@ class Apply():
                 break
         sleep(10)
         #self.driver.maximize_window()
+        self.waituntil('xpath', '//nobr[text()="下一步"]')
         try:
             number = self.driver.find_element(By.XPATH, '//*[@id="title_description"]').text
             print('打开健康申报成功')
