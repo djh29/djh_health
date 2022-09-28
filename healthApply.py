@@ -134,9 +134,9 @@ class Apply():
         except:
             print('打开健康申报失败')
             raise Exception('打开健康申报失败')
-        print("点击下一步")
+        sleep(5)
         self.driver.find_element(By.XPATH,"//nobr[text()='下一步']").click() # 进入表单
-        #self.driver.find_element(By.XPATH, '//*[@id="form_command_bar"]/li[1]').click()
+        print("点击下一步")
         time.sleep(15)
         try:
             # 如果有未打钩的情况下需要再执行多一步
