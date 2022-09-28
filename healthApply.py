@@ -126,14 +126,13 @@ class Apply():
             if not self.waituntil('xpath', "//*[text()='验证码不正确 ']"):
                 break
 
-        #self.driver.maximize_window()
+       #self.driver.maximize_window()
        try:
-           number = self.driver.find_element(By.XPATH, '//*[@id="title_description"]').text
-           print('打开健康申报成功')
+            number = self.driver.find_element(By.XPATH, '//*[@id="title_description"]').text
+            print('打开健康申报成功')
        except:
            print('打开健康申报失败')
            raise Exception('打开健康申报失败')
-
         print("点击下一步")
         self.driver.find_element(By.XPATH, '//*[@id="form_command_bar"]/li[1]').click()
         time.sleep(15)
