@@ -131,22 +131,19 @@ class Apply():
         self.waituntil('xpath', '//nobr[text()="下一步"]')
         self.driver.find_element(By.XPATH,"//nobr[text()='下一步']").click() # 进入表单
         sleep(10)
+        try:
+            # 如果有未打钩的情况下需要再执行多一步
+            self.driver.find_element(By.ID,'V1_CTRL335').click()
+        except:
+            pass
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
         self.driver.find_element(By.XPATH,'//*[@id="form_command_bar"]/li[1]').click() # 提交
         self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
         sleep(10)
         print("        提交。")
         #result = driver.find_element(By.XPATH,'//*[@class="dialog_content"]').text
+        self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
         self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
-        try:
-            # 如果有未打钩的情况下需要再执行多一步
-            self.driver.find_element(By.ID,'V1_CTRL335').click()
-            self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
-            self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
-            self.driver.quit()
-            c_service.service.stop()
-        except:
-            pass
         print("完成健康申报")
         print("        Done.")
         self.driver.quit()
