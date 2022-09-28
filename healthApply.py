@@ -137,7 +137,7 @@ class Apply():
         sleep(5)
         self.driver.find_element(By.XPATH,"//nobr[text()='下一步']").click() # 进入表单
         print("点击下一步")
-        time.sleep(15)
+        sleep(15)
         try:
             # 如果有未打钩的情况下需要再执行多一步
             self.driver.find_element(By.ID,'V1_CTRL335').click()
@@ -147,7 +147,7 @@ class Apply():
         print("提交健康申报")
         self.waituntil('xpath', '//*[@id="form_command_bar"]/li[1]')
         self.driver.find_element(By.XPATH, '//*[@id="form_command_bar"]/li[1]').click()
-        time.sleep(15)
+        sleep(15)
         result = self.driver.find_element(By.XPATH, '//div[8]/div/div[1]/div[2]').text
         print("完成健康申报")
         self.driver.quit()
