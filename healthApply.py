@@ -138,19 +138,19 @@ class Apply():
         print("        提交。")
         #result = driver.find_element(By.XPATH,'//*[@class="dialog_content"]').text
         self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
-        print("完成健康申报")
-        print("        Done.")
-        self.driver.quit()
-        c_service.stop()
         try:
             # 如果有未打钩的情况下需要再执行多一步
-            self.driver.find_element(By.ID,'V1_CTRL82').click()
+            self.driver.find_element(By.ID,'V1_CTRL335').click()
             self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
             self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
             self.driver.quit()
             c_service.service.stop()
         except:
             pass
+        print("完成健康申报")
+        print("        Done.")
+        self.driver.quit()
+        c_service.stop()
         return f'{result}'
 
 def spilt(id,pw):
