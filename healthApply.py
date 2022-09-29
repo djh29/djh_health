@@ -143,8 +143,6 @@ class Apply():
         print("提交健康申报")
         sleep(15)
         try:
-            self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
-            self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
             # 如果有未打钩的情况下需要再执行多一步
             self.driver.find_element(By.ID,'V1_CTRL335').click()
             print('点击复选框')
@@ -153,7 +151,9 @@ class Apply():
             sleep(15)
         except:
             pass
+        self.waituntil('xpath', '//*[@class="dialog_footer"]/button')
         result = self.driver.find_element(By.XPATH, '//div[8]/div/div[1]/div[2]').text
+        self.driver.find_element(By.XPATH,'//*[@class="dialog_footer"]/button').click()
         print("完成健康申报")
         self.driver.quit()
         c_service.stop()
